@@ -4,6 +4,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -45,8 +46,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(home).title("Marker at home"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(home));
     }
-    public void upload(){
-        Intent uploadIntent=new Intent();
+    public void upload(View v){
+        Intent myIntent = new Intent(this,UpdateForm.class);
+        startActivity(myIntent);
 
     }
     public void refresh(){

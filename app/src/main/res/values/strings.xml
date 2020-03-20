@@ -3,4 +3,6 @@
     <string name="title_activity_maps">Map</string>
     <string name="upload" translatable="false">upload</string>
     <string name="refresh" translatable="false">refresh</string>
+    <string name="upload_an_event" translatable="false">upload an event</string>
+    <string name="current_location" translatable="false">getting current location...</string>
 </resources>
