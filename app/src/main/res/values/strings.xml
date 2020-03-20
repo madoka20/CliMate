@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">CliMate</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="upload" translatable="false">upload</string>
+    <string name="refresh" translatable="false">refresh</string>
+</resources>
