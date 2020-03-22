@@ -1,8 +1,15 @@
 <resources>
     <string name="app_name">CliMate</string>
     <string name="title_activity_maps">Map</string>
-    <string name="upload" translatable="false">upload</string>
-    <string name="refresh" translatable="false">refresh</string>
-    <string name="upload_an_event" translatable="false">upload an event</string>
-    <string name="current_location" translatable="false">getting current location...</string>
+    <string name="upload" translatable="false">Upload</string>
+    <string name="refresh" translatable="false">Refresh</string>
+    <string name="upload_an_event" translatable="false">Upload an event</string>
+    <string name="current_location" translatable="false">Getting current location...</string>
+    <string name="date" translatable="false">Date</string>
+    <string name="time" translatable="false">time</string>
+    <string name="description" translatable="false">Describe this event...</string>
+    <string name="upload_img" translatable="false">Upload an image</string>
+    <string name="upload_img_text" translatable="false">Please upload an image as evidence (optional)</string>
+    <string name="submit" translatable="false">Submit</string>
+    <string name="cancel" translatable="false">Cancel</string>
 </resources>
