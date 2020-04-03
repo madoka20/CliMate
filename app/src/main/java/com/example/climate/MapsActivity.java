@@ -1,11 +1,15 @@
 package com.example.climate;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -13,17 +17,29 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+    public FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+    public DatabaseReference mDatabaseReference = mDatabase.getReference();
     private GoogleMap mMap;
     private Button submitBtn;
 
-
+    public double lat;
+    public double lon;
+    public String type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -32,34 +48,50 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
         submitBtn=findViewById(R.id.submit);
-    }
 
+        }
+    ArrayList<Double> lats = new ArrayList<Double>();
+    ArrayList<Double> lons = new ArrayList<Double>();
+    ArrayList<String> types = new ArrayList<String>();
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        Intent intent=getIntent();
+        lats.add(intent.getDoubleExtra("lat",0.0));
+        lons.add(intent.getDoubleExtra("lon",0.0));
+        types.add(intent.getStringExtra("type"));
 
-        // Add a marker in Sydney and move the camera
-        LatLng home = new LatLng(30.5728, 104.0668);
-        mMap.addMarker(new MarkerOptions().position(home).title("Marker at home"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(home));
+
+        mMap = googleMap;
+        for(int i=0;i<lats.size();i++){
+            LatLng mark=new LatLng(lats.get(i),lons.get(i));
+            type= types.get(i);
+            mMap.addMarker(new MarkerOptions().position(mark).title(type));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(mark));
+        }
+        LatLng mark2=new LatLng(31,105);
+
+        mMap.addMarker(new MarkerOptions().position(mark2).title("test"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(mark2));
+
+//        Context context = getApplicationContext();
+//        CharSequence text =
+//        int duration = Toast.LENGTH_SHORT;
+//
+//        Toast toast = Toast.makeText(context, text, duration);
+//        toast.show();
+
+
     }
+
     public void upload(View v){
         Intent myIntent = new Intent(this,UpdateForm.class);
         startActivity(myIntent);
 
     }
-    public void refresh(){
-
+    public void refresh(View v){
+        Intent myIntent = new Intent(this,MapsActivity.class);
+        startActivity(myIntent);
     }
 
 }

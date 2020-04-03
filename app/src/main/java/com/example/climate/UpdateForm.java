@@ -38,7 +38,7 @@ public class UpdateForm extends AppCompatActivity {
     public FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     public DatabaseReference mDatabaseReference = mDatabase.getReference();
     public int userid=1;
-    public String eventId="2";
+    public String eventid;
     public String type;
 
     public Timestamp time;
@@ -70,6 +70,11 @@ public class UpdateForm extends AppCompatActivity {
 
         //time
         time=new Timestamp(System.currentTimeMillis());
+        int date=time.getDate();
+        int hour=time.getHours();
+        int minute=time.getMinutes();
+        int second=time.getSeconds();
+        eventid=Integer.toString(date)+Integer.toString(hour)+Integer.toString(minute)+Integer.toString(second);
         //type selector
         dropdown1 = findViewById(R.id.type_selector);
         String[] items1 = new String[]{"Select type...","Snow storm", "Earthquake", "Volcano eruption"};
@@ -94,10 +99,13 @@ public class UpdateForm extends AppCompatActivity {
 
         description=destv.getText().toString();
 
-        Events event=new Events(userid,type,lat,lon,time,dangerlevel,description);
-        mDatabaseReference.child("Events").child(eventId).setValue(event);
+        Events event=new Events(type,lat,lon,time,dangerlevel,description);
+        mDatabaseReference.child("Events").child(eventid).setValue(event);
 
         Intent myIntent = new Intent(this,MapsActivity.class);
+        myIntent.putExtra("lat",lat);
+        myIntent.putExtra("lon",lon);
+        myIntent.putExtra("type",type);
         startActivity(myIntent);
 
         Context context = getApplicationContext();
