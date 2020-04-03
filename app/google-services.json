@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "63190777342",
+    "firebase_url": "https://climate-a0692.firebaseio.com",
+    "project_id": "climate-a0692",
+    "storage_bucket": "climate-a0692.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:63190777342:android:0cfc028f7ec9d29b6214af",
+        "android_client_info": {
+          "package_name": "com.example.climate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "63190777342-j3ssf1b04bsucrjtovjee8girk5pfht2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnm_cKsTtE7mJ1FLNaiZ2xhbfNocXV4jM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "63190777342-j3ssf1b04bsucrjtovjee8girk5pfht2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
