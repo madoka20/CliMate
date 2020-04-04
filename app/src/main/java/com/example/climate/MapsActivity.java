@@ -22,11 +22,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
     public FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
@@ -54,13 +56,52 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     ArrayList<Double> lons = new ArrayList<Double>();
     ArrayList<String> types = new ArrayList<String>();
 
+    int id=0;
+    public void getEvents(){
+        mDatabaseReference.child("Events").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) { //never called?
+
+//                Iterator<DataSnapshot> items = dataSnapshot.getChildren().iterator();
+                Toast.makeText(MapsActivity.this, "Total Events: " +dataSnapshot.getChildrenCount(),Toast.LENGTH_SHORT);
+//                while(items.hasNext()){
+//                    DataSnapshot item=items.next();
+//                    type=item.child("type").getValue().toString();
+//                    lat=Double.valueOf(item.child("lat").getValue().toString());
+//                    lon=Double.valueOf(item.child("lon").getValue().toString());
+//                    types.add(type);
+//                    lats.add(lat);
+//                    lons.add(lon);
+//                }
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+
+                    type=snapshot.child("type").toString();
+                    lat=Double.valueOf(snapshot.child("lat").getValue().toString());
+                    lon=Double.valueOf(snapshot.child("lon").getValue().toString());
+                    types.add(type);
+                    lats.add(lat);
+                    lons.add(lon);
+                }
+
+//
+                mDatabaseReference.child("Events").removeEventListener(this);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        Intent intent=getIntent();
-        lats.add(intent.getDoubleExtra("lat",0.0));
-        lons.add(intent.getDoubleExtra("lon",0.0));
-        types.add(intent.getStringExtra("type"));
-
+        getEvents();
 
         mMap = googleMap;
         for(int i=0;i<lats.size();i++){
@@ -69,10 +110,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.addMarker(new MarkerOptions().position(mark).title(type));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(mark));
         }
-        LatLng mark2=new LatLng(31,105);
-
-        mMap.addMarker(new MarkerOptions().position(mark2).title("test"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(mark2));
+//        LatLng mark2=new LatLng(31,105);
+//
+//        mMap.addMarker(new MarkerOptions().position(mark2).title("test"));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(mark2));
 
 //        Context context = getApplicationContext();
 //        CharSequence text =

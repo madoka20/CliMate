@@ -103,9 +103,7 @@ public class UpdateForm extends AppCompatActivity {
         mDatabaseReference.child("Events").child(eventid).setValue(event);
 
         Intent myIntent = new Intent(this,MapsActivity.class);
-        myIntent.putExtra("lat",lat);
-        myIntent.putExtra("lon",lon);
-        myIntent.putExtra("type",type);
+
         startActivity(myIntent);
 
         Context context = getApplicationContext();
