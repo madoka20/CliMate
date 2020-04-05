@@ -52,19 +52,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         submitBtn=findViewById(R.id.submit);
 
         }
-    ArrayList<Double> lats = new ArrayList<Double>();
-    ArrayList<Double> lons = new ArrayList<Double>();
-    ArrayList<String> types = new ArrayList<String>();
 
-    int id=0;
-    public void getEvents(){
-        mDatabaseReference.child("Events").addListenerForSingleValueEvent(new ValueEventListener() {
+
+
+
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        mDatabaseReference.child("Events").addValueEventListener(new ValueEventListener() {
             @Override
 
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) { //never called?
 
 //                Iterator<DataSnapshot> items = dataSnapshot.getChildren().iterator();
-                Toast.makeText(MapsActivity.this, "Total Events: " +dataSnapshot.getChildrenCount(),Toast.LENGTH_SHORT);
+                Toast.makeText(MapsActivity.this, "Total Events: " + dataSnapshot.getChildrenCount(), Toast.LENGTH_SHORT);
 //                while(items.hasNext()){
 //                    DataSnapshot item=items.next();
 //                    type=item.child("type").getValue().toString();
@@ -74,20 +76,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //                    lats.add(lat);
 //                    lons.add(lon);
 //                }
-
+//
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    type = snapshot.child("type").getValue().toString();
+                    lat = Double.valueOf(snapshot.child("lat").getValue().toString());
+                    lon = Double.valueOf(snapshot.child("lon").getValue().toString());
+                    LatLng mark=new LatLng(lat,lon);
 
-
-                    type=snapshot.child("type").toString();
-                    lat=Double.valueOf(snapshot.child("lat").getValue().toString());
-                    lon=Double.valueOf(snapshot.child("lon").getValue().toString());
-                    types.add(type);
-                    lats.add(lat);
-                    lons.add(lon);
+                    mMap.addMarker(new MarkerOptions().position(mark).title(type));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(mark));
                 }
 
-//
-                mDatabaseReference.child("Events").removeEventListener(this);
+//                        mDatabaseReference.child("Events").removeEventListener(this);
             }
 
             @Override
@@ -95,21 +95,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
         });
-    }
 
 
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        getEvents();
-
-        mMap = googleMap;
-        for(int i=0;i<lats.size();i++){
-            LatLng mark=new LatLng(lats.get(i),lons.get(i));
-            type= types.get(i);
-            mMap.addMarker(new MarkerOptions().position(mark).title(type));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(mark));
-        }
 //        LatLng mark2=new LatLng(31,105);
 //
 //        mMap.addMarker(new MarkerOptions().position(mark2).title("test"));
@@ -121,7 +109,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //
 //        Toast toast = Toast.makeText(context, text, duration);
 //        toast.show();
-
 
     }
 
