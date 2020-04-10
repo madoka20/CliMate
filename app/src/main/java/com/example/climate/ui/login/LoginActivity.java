@@ -26,9 +26,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.climate.ChangeProfile;
 import com.example.climate.MapsActivity;
 import com.example.climate.R;
-import com.example.climate.SignUpActivity;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -156,7 +157,7 @@ public class LoginActivity extends AppCompatActivity {
 //            return true;
 //        }
         if (id == R.id.menu_signup) {
-            Intent myIntent = new Intent(this, SignUpActivity.class);
+            Intent myIntent = new Intent(this, ChangeProfile.class);
             startActivity(myIntent);
             return true;
         }

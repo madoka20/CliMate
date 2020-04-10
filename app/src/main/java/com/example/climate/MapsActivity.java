@@ -70,6 +70,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //                    lons.add(lon);
 //                }
 //
+                //iterate the data and show markers to map
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     type = snapshot.child("type").getValue().toString();
                     lat = Double.valueOf(snapshot.child("lat").getValue().toString());
