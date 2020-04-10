@@ -43,9 +43,17 @@
     <string name="menu_settings">Settings</string>
     <string name="menu_login">Login</string>
     <string name="menu_map">Map</string>
-    <string name="menu_signup">Sign up</string>
+    <string name="menu_profile">Profile</string>
 <!--menu-->
 
+    <string name="settings">Settings</string>
+    <string name="num_events">Numer of events show on the map:</string>
+    <string name="set1">Max:65535</string>
+    <string name="area">Alarm area:</string>
+    <string name="set2">Max:10000 miles</string>
+    <string name="alarm_mode">Alarm mode:</string>
+    <string name="min_dangerlevel">Minimum danger level:</string>
+    <string name="save">Save</string>
 <!--settings -->
 
 </resources>

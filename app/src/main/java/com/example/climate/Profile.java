@@ -3,9 +3,15 @@ package com.example.climate;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
+import com.example.climate.ui.login.LoginActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -51,5 +57,52 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+//        if (id == R.id.menu_settings) {
+//            Intent myIntent = new Intent(this, Settings.class);
+//            startActivity(myIntent);
+//            return true;
+//        }
+        if (id == R.id.menu_settings) {
+            Intent myIntent = new Intent(this, Setting.class);
+            startActivity(myIntent);
+            return true;
+        }
+        if (id == R.id.menu_profile) {
+
+            return true;
+        }
+        if (id == R.id.menu_map) {
+            Intent myIntent = new Intent(this, MapsActivity.class);
+            startActivity(myIntent);
+            return true;
+        }
+        if (id == R.id.menu_login) {
+            Intent myIntent = new Intent(this, LoginActivity.class);
+            startActivity(myIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void moveToCp(View view) {
+        Intent myIntent = new Intent(this, ChangeProfile.class);
+        startActivity(myIntent);
     }
 }

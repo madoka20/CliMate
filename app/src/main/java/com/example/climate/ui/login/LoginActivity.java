@@ -28,7 +28,9 @@ import android.widget.Toast;
 
 import com.example.climate.ChangeProfile;
 import com.example.climate.MapsActivity;
+import com.example.climate.Profile;
 import com.example.climate.R;
+import com.example.climate.Setting;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -156,8 +158,13 @@ public class LoginActivity extends AppCompatActivity {
 //            startActivity(myIntent);
 //            return true;
 //        }
-        if (id == R.id.menu_signup) {
-            Intent myIntent = new Intent(this, ChangeProfile.class);
+        if (id == R.id.menu_settings) {
+            Intent myIntent = new Intent(this, Setting.class);
+            startActivity(myIntent);
+            return true;
+        }
+        if (id == R.id.menu_profile) {
+            Intent myIntent = new Intent(this, Profile.class);
             startActivity(myIntent);
             return true;
         }

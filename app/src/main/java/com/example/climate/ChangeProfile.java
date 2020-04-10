@@ -29,7 +29,7 @@ public class ChangeProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_change_profile);
         username=findViewById(R.id.username).getContext().toString();
         country=findViewById(R.id.country).getContext().toString();
         state=findViewById(R.id.state).getContext().toString();
@@ -42,7 +42,7 @@ public class ChangeProfile extends AppCompatActivity {
     public void save_profile(View view){
         User user = new User(username,country,state,city,email,phone_num);
         mDatabaseReference.child("Profile").child(username).setValue(user);
-        Intent myIntent = new Intent(this,MapsActivity.class);
+        Intent myIntent = new Intent(this,Profile.class);
 
         startActivity(myIntent);
 
@@ -54,46 +54,10 @@ public class ChangeProfile extends AppCompatActivity {
         toast.show();
     }
     public void cancel(View view){
-        Intent myIntent = new Intent(this,MapsActivity.class);
+        Intent myIntent = new Intent(this,Profile.class);
 
         startActivity(myIntent);
 
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-//        if (id == R.id.menu_settings) {
-//            Intent myIntent = new Intent(this, Settings.class);
-//            startActivity(myIntent);
-//            return true;
-//        }
-        if (id == R.id.menu_signup) {
-
-            return true;
-        }
-        if (id == R.id.menu_map) {
-            Intent myIntent = new Intent(this, MapsActivity.class);
-            startActivity(myIntent);
-            return true;
-        }
-        if (id == R.id.menu_login) {
-            Intent myIntent = new Intent(this, LoginActivity.class);
-            startActivity(myIntent);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }
