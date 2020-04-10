@@ -1,5 +1,5 @@
 package com.example.climate;
-
+//user class
 public class User {
     public String username;
     public String country;

@@ -1,20 +1,15 @@
 package com.example.climate;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.climate.User;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.example.climate.ui.login.LoginActivity;
 
 public class ChangeProfile extends AppCompatActivity {
     public String username;
@@ -38,7 +33,7 @@ public class ChangeProfile extends AppCompatActivity {
         phone_num=findViewById(R.id.phone_num).getContext().toString();
 
     }
-
+//save the profile into database
     public void save_profile(View view){
         User user = new User(username,country,state,city,email,phone_num);
         mDatabaseReference.child("Profile").child(username).setValue(user);

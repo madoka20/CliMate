@@ -33,6 +33,7 @@ public class Profile extends AppCompatActivity {
         t1=findViewById(R.id.city);
         t1=findViewById(R.id.email);
         t1=findViewById(R.id.phone_num);
+        //get profile from database
         mDatabaseReference.child("Profile").addValueEventListener(new ValueEventListener() {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //get profile. since we can't get the username which is logging in, we use an example.

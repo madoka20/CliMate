@@ -77,7 +77,7 @@ public class UpdateForm extends AppCompatActivity {
         eventid=Integer.toString(date)+Integer.toString(hour)+Integer.toString(minute)+Integer.toString(second);
         //type selector
         dropdown1 = findViewById(R.id.type_selector);
-        String[] items1 = new String[]{"Select type...","Snow storm", "Earthquake", "Volcano eruption"};
+        String[] items1 = new String[]{"Select type...","Snow storm", "Earthquake","Tsunami", "Volcano eruption","Heavy rain","Slippery","Ice road","Storm","Tornado","Wildfire","Extremely hot","Extremely cold","Dead animals","Car accident","Gun shooting","Building collapse","Coronavirus"};
         ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items1);
         dropdown1.setAdapter(adapter1);
 
@@ -89,7 +89,7 @@ public class UpdateForm extends AppCompatActivity {
 
         destv=findViewById(R.id.description);
     }
-
+//upload to db
     public void upload_event(View v){
 
 

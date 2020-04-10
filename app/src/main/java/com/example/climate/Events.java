@@ -1,12 +1,8 @@
 package com.example.climate;
 
-import android.location.Location;
-
-import java.io.File;
 import java.io.Serializable;
-import java.security.PublicKey;
 import java.sql.Timestamp;
-
+//event class
 public class Events implements Serializable {
     public int userid=0;
     public String eventid;

@@ -1,49 +1,26 @@
 package com.example.climate;
 
-import androidx.appcompat.app.AppCompatActivity;
-import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Looper;
-import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import com.example.climate.ui.login.LoginActivity;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.io.File;
-import java.sql.Timestamp;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.os.Bundle;
 
 public class Setting extends AppCompatActivity {
     public FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
@@ -90,10 +67,10 @@ public class Setting extends AppCompatActivity {
         mDatabaseReference.child("Profile").addValueEventListener(new ValueEventListener() {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //get profile. since we can't get the username which is logging in, we use an example.
-                t1.setText("Numer of events show on the map:"+dataSnapshot.child("Profile").child("TestUser").child("max_events").getValue());
-                t2.setText("Alarm area:"+dataSnapshot.child("Profile").child("TestUser").child("area").getValue());
-                t3.setText("Alarm mode:"+dataSnapshot.child("Profile").child("TestUser").child("mode").getValue());
-                t4.setText("Minimum danger level:"+dataSnapshot.child("Profile").child("TestUser").child("min_dangerlevel").getValue());
+                t1.setText("Numer of events show on the map:"+dataSnapshot.child("Profile").child("TestUser").child("max_events").getValue().toString());
+                t2.setText("Alarm area:"+dataSnapshot.child("Profile").child("TestUser").child("area").getValue().toString());
+                t3.setText("Alarm mode:"+dataSnapshot.child("Profile").child("TestUser").child("mode").getValue().toString());
+                t4.setText("Minimum danger level:"+dataSnapshot.child("Profile").child("TestUser").child("min_dangerlevel").getValue().toString());
 
             }
 
@@ -104,9 +81,6 @@ public class Setting extends AppCompatActivity {
         });
 
 
-
-
-
         Context context = getApplicationContext();
         CharSequence text = "Saved Successfully!";
         int duration = Toast.LENGTH_SHORT;
@@ -115,6 +89,9 @@ public class Setting extends AppCompatActivity {
         toast.show();
     }
     public void cancel(View view){
+
+            Intent myIntent = new Intent(this, MapsActivity.class);
+            startActivity(myIntent);
 
     }
     @Override

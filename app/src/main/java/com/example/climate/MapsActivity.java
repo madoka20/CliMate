@@ -105,17 +105,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        toast.show();
 
     }
-
+//move to upload event activity
     public void upload(View v){
         Intent myIntent = new Intent(this,UpdateForm.class);
         startActivity(myIntent);
 
     }
+    //refresh the map
     public void refresh(View v){
         Intent myIntent = new Intent(this,MapsActivity.class);
         startActivity(myIntent);
     }
 
+    //go to login page
 
     public void moveToLogin(View view) {
         Intent myIntent = new Intent(this, LoginActivity.class);
