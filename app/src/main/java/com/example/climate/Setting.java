@@ -32,6 +32,7 @@ public class Setting extends AppCompatActivity {
     Spinner dropdown1;
     Spinner dropdown2;
     TextView t1,t2,t3,t4;
+    TextView ma,ar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,29 +49,22 @@ public class Setting extends AppCompatActivity {
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items2);
         dropdown2.setAdapter(adapter2);
 
-        maxevents=Integer.parseInt(findViewById(R.id.num_of_events).toString());
-        area=Integer.parseInt(findViewById(R.id.alarm_area).toString());
+        ma=findViewById(R.id.num_of_events);
+        ar=findViewById(R.id.alarm_area);
+
+
 
         t1=findViewById(R.id.set1);
         t2=findViewById(R.id.set2);
         t3=findViewById(R.id.set3);
         t4=findViewById(R.id.set4);
-
-    }
-    public void save_settings(View view){
-        mode=dropdown1.getSelectedItem().toString();
-        mindangerlevel=Integer.parseInt(dropdown2.getSelectedItem().toString());
-        mDatabaseReference.child("Profile").child("TestUser").child("max_events").setValue(maxevents);
-        mDatabaseReference.child("Profile").child("TestUser").child("area").setValue(area);
-        mDatabaseReference.child("Profile").child("TestUser").child("mode").setValue(mode);
-        mDatabaseReference.child("Profile").child("TestUser").child("min_dangerlevel").setValue(mindangerlevel);
         mDatabaseReference.child("Profile").addValueEventListener(new ValueEventListener() {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //get profile. since we can't get the username which is logging in, we use an example.
-                t1.setText("Numer of events show on the map:"+dataSnapshot.child("Profile").child("TestUser").child("max_events").getValue().toString());
-                t2.setText("Alarm area:"+dataSnapshot.child("Profile").child("TestUser").child("area").getValue().toString());
-                t3.setText("Alarm mode:"+dataSnapshot.child("Profile").child("TestUser").child("mode").getValue().toString());
-                t4.setText("Minimum danger level:"+dataSnapshot.child("Profile").child("TestUser").child("min_dangerlevel").getValue().toString());
+                t1.setText("Numer of events show on the map:"+dataSnapshot.child("TestUser").child("max_events").getValue().toString());
+                t2.setText("Alarm area:"+dataSnapshot.child("TestUser").child("area").getValue().toString());
+                t3.setText("Alarm mode:"+dataSnapshot.child("TestUser").child("mode").getValue().toString());
+                t4.setText("Minimum danger level:"+dataSnapshot.child("TestUser").child("min_dangerlevel").getValue().toString());
 
             }
 
@@ -79,6 +73,17 @@ public class Setting extends AppCompatActivity {
 
             }
         });
+    }
+    public void save_settings(View view){
+        maxevents=Integer.parseInt(ma.getText().toString());
+        area=Integer.parseInt(ar.getText().toString());
+        mode=dropdown1.getSelectedItem().toString();
+        mindangerlevel=Integer.parseInt(dropdown2.getSelectedItem().toString());
+        mDatabaseReference.child("Profile").child("TestUser").child("max_events").setValue(maxevents);
+        mDatabaseReference.child("Profile").child("TestUser").child("area").setValue(area);
+        mDatabaseReference.child("Profile").child("TestUser").child("mode").setValue(mode);
+        mDatabaseReference.child("Profile").child("TestUser").child("min_dangerlevel").setValue(mindangerlevel);
+
 
 
         Context context = getApplicationContext();

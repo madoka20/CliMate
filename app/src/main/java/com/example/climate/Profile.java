@@ -27,12 +27,12 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        t1=findViewById(R.id.username);
-        t1=findViewById(R.id.country);
-        t1=findViewById(R.id.state);
-        t1=findViewById(R.id.city);
-        t1=findViewById(R.id.email);
-        t1=findViewById(R.id.phone_num);
+        t1=findViewById(R.id.t1);
+        t2=findViewById(R.id.t2);
+        t3=findViewById(R.id.t3);
+        t4=findViewById(R.id.t4);
+        t5=findViewById(R.id.t5);
+        t6=findViewById(R.id.t6);
         //get profile from database
         mDatabaseReference.child("Profile").addValueEventListener(new ValueEventListener() {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
