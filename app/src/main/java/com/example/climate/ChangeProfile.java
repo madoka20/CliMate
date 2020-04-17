@@ -44,8 +44,14 @@ public class ChangeProfile extends AppCompatActivity {
         email=t5.getText().toString();
         phone_num=t6.getText().toString();
 
-        User user = new User(username,country,state,city,email,phone_num);
-        mDatabaseReference.child("Profile").child("TestUser").setValue(user);
+//        User user = new User(username,country,state,city,email,phone_num);
+        mDatabaseReference.child("Profile").child("TestUser").child("username").setValue(username);
+        mDatabaseReference.child("Profile").child("TestUser").child("country").setValue(country);
+        mDatabaseReference.child("Profile").child("TestUser").child("state").setValue(state);
+        mDatabaseReference.child("Profile").child("TestUser").child("city").setValue(city);
+        mDatabaseReference.child("Profile").child("TestUser").child("email").setValue(email);
+        mDatabaseReference.child("Profile").child("TestUser").child("phone_num").setValue(phone_num);
+
         Intent myIntent = new Intent(this,Profile.class);
 
         startActivity(myIntent);
